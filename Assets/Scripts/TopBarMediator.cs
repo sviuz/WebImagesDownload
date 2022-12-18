@@ -9,11 +9,18 @@ public class TopBarMediator : MonoBehaviour {
   [SerializeField]
   private Button _getImages;
   [SerializeField]
+  private Button _clear;
+  [SerializeField]
   private TMP_Text _imagesCapacityText;
+
   private int _imagesCapacity;
 
-  public void SubscribeAction(Action<string> getImages) {
-    _getImages.onClick.AddListener(() => getImages?.Invoke(_inputField.text));
+  public void SubscribeGetImagesButton(Action<string> getImages) {
+    _getImages.onClick.AddListener(() => getImages(_inputField.text));
+  }
+
+  public void SubscribeClearButton(Action clean) {
+    _clear.onClick.AddListener(() => clean());
   }
 
   public void IncreaseImagesCapacity() {

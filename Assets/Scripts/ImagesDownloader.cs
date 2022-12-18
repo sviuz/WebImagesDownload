@@ -1,6 +1,6 @@
 ﻿using System;
-using DefaultNamespace;
 using Handlers;
+using Helpers;
 using UnityEngine;
 
 public class ImagesDownloader : MonoBehaviour {
@@ -10,7 +10,6 @@ public class ImagesDownloader : MonoBehaviour {
   ///   https://www.thegentlemansjournal.com/article/dress-like-an-italian-alessandro-squarzis-guide-to-summer-style/
   ///   https://www.fortela.it/Shop/
   /// </summary>
-  /// 
   [SerializeField]
   private TopBarMediator _topBarMediator;
   [SerializeField]
@@ -19,65 +18,54 @@ public class ImagesDownloader : MonoBehaviour {
   private ImagesHandler _imagesHandler;
 
   private void Start() {
-    _topBarMediator.SubscribeAction(DownloadImage);
+    _topBarMediator.SubscribeGetImagesButton(DownloadImage);
+    _topBarMediator.SubscribeClearButton(_imagesHandler.Clear);
   }
 
-  private void DownloadImage(string url) { //TODO refactor
-    CLeanUp();
+  private void DownloadImage(string url) {
+    CleanUp();
 
-    Get(url, error => {
-               Debug.Log("Error");
-             }, htmlCode => {
-                  var cycleProtection = 0;
-                  while (B(htmlCode, cycleProtection)) {
-                    cycleProtection++;
-                    string imageUrl = GettingImageUrl(ref htmlCode);
-
-                    if (TextureHandler.ExtractObject(imageUrl)) {
-                      Texture texture = TextureHandler.GetObject(imageUrl);
-                      InstantiateRawImage(imageUrl, texture);
-                      continue;
-                    }
-                    
-                    TryGetTexture(imageUrl);
-                  }
-                });
+    Get(url, OnError(), OnSuccess());
   }
 
-  private static string GettingImageUrl(ref string htmlCode) {
-    var textToFind = "<img";
-    htmlCode = htmlCode[(htmlCode.IndexOf(textToFind, StringComparison.Ordinal) + textToFind.Length)..];
-    textToFind = "src=\"";
-    htmlCode = htmlCode[(htmlCode.IndexOf(textToFind, StringComparison.Ordinal) + textToFind.Length)..];
-    string imageUrl = htmlCode[..htmlCode.IndexOf("\"", StringComparison.Ordinal)];
-    return imageUrl;
+  private static Action<string> OnError() {
+    return error => {
+             Debug.Log("Error");
+           };
   }
 
-  private void CLeanUp() {
+  private Action<string> OnSuccess() {
+    return htmlCode => {
+             var cycleProtection = 0;
+             while (B(htmlCode, cycleProtection)) {
+               cycleProtection++;
+               string imageUrl = htmlCode.ConvertAsImageUrl();
+
+               if (TextureHandler.ExtractObject(imageUrl, out Texture texture)) {
+                 InstantiateRawImage(imageUrl, texture);
+                 continue;
+               }
+
+               TryGetTexture(imageUrl);
+             }
+           };
+  }
+
+  private void CleanUp() {
     _imagesHandler.Clear();
     _topBarMediator.ClearCapacity();
   }
 
   private static bool B(string htmlCode, int cycleProtection) {
-    return HtmlHasImgTag(htmlCode) && cycleProtection < 100;
-  }
-
-  private static bool HtmlHasImgTag(string htmlCode) {
-    return htmlCode.IndexOf("<img", StringComparison.Ordinal) != -1;
+    return htmlCode.ContainsImgTag() && cycleProtection < 100;
   }
 
   private void TryGetTexture(string imageUrl) {
-    
-
-    GetTexture(imageUrl, error => {
-                           Debug.Log("Error: " + error);
-                         }, texture => {
-                              if (texture.IsValid()) {
-                                InstantiateRawImage(imageUrl, texture);
-                              } else {
-                                Debug.Log("texture is not valid");
-                              }
-                            });
+    GetTexture(imageUrl, OnError(), texture => {
+                                      if (texture.IsValid()) {
+                                        InstantiateRawImage(imageUrl, texture);
+                                      }
+                                    });
   }
 
   private void InstantiateRawImage(string imageUrl, Texture texture) {

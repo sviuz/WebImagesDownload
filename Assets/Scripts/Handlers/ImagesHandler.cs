@@ -3,25 +3,23 @@ using UnityEngine;
 
 namespace Handlers {
   public sealed class ImagesHandler : MonoBehaviour {
-    private ObjectHandler<RawImagePrefab> imagesObjectHandler = new ObjectHandler<RawImagePrefab>();
-    private List<GameObject> _gameObjects = new();
+    private readonly List<GameObject> _gameObjects = new();
+    private readonly ObjectHandler<RawImagePrefab> imagesObjectHandler = new();
 
-    private static object locker = new ();
-    
-    public void AddImageObject(string name, RawImagePrefab obj) {
-      imagesObjectHandler.AddObjectNonStatic(name, obj);
+    public void AddImageObject(string objName, RawImagePrefab obj) {
+      imagesObjectHandler.AddObjectNonStatic(objName, obj);
       _gameObjects.Add(obj.gameObject);
     }
 
     public void Clear() {
       if (_gameObjects.Count == decimal.Zero) {
-        Debug.Log("list is empty");
         return;
       }
 
-      foreach (var obj in _gameObjects) {
+      foreach (GameObject obj in _gameObjects) {
         Destroy(obj);
       }
+
       _gameObjects.Clear();
     }
   }

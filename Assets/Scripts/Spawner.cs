@@ -1,4 +1,4 @@
-﻿using DefaultNamespace;
+﻿using Helpers;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour {
   public RawImagePrefab Spawn(Texture texture) {
     return InstantiateImage(texture);
   }
-  
+
   private RawImagePrefab InstantiateImage(Texture texture) {
     return Instantiate(_rawImagePrefab, _transform).Then(img => img.SetTexture(texture));
   }
