@@ -2,22 +2,22 @@
 using UnityEngine;
 
 namespace Handlers {
-  public sealed class ImagesHandler : MonoBehaviour {
-    private readonly List<GameObject> _gameObjects = new();
-    private readonly ObjectHandler<RawImagePrefab> imagesObjectHandler = new();
+  public sealed class ImagesHandler :  ObjectHandler<RawImagePrefab> {
+    private static List<GameObject> _gameObjects = new();
+    // private static ObjectHandler<RawImagePrefab> imagesObjectHandler = new();
 
-    public void AddImageObject(string objName, RawImagePrefab obj) {
-      imagesObjectHandler.AddObjectNonStatic(objName, obj);
+    public static void AddImageObject(string objName, RawImagePrefab obj) {
+      AddObject(objName, obj);
       _gameObjects.Add(obj.gameObject);
     }
 
-    public void Clear() {
+    public static void Clear() {
       if (_gameObjects.Count == decimal.Zero) {
         return;
       }
 
       foreach (GameObject obj in _gameObjects) {
-        Destroy(obj);
+        Object.Destroy(obj);
       }
 
       _gameObjects.Clear();

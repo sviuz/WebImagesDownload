@@ -45,4 +45,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _topBarMediator: {fileID: 0}
-  _spawner: {fileID: 0}

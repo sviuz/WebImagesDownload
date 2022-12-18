@@ -279,23 +279,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30019799}
   m_CullTransparentMesh: 1
---- !u!1 &68583793 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8174723201137721558, guid: 176c10758de2ce745a7b1ee85eb55c16, type: 3}
-  m_PrefabInstance: {fileID: 8174723201069466023}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &68583796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68583793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83e17ed897b46a59c9646a492b23bba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &98508594
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,10 +846,10 @@ RectTransform:
   m_Father: {fileID: 650587785}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -318, y: 247.2}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0.07021876, y: 0.8125556}
+  m_AnchorMax: {x: 0.22731249, y: 0.880389}
+  m_AnchoredPosition: {x: -1, y: -0.5}
+  m_SizeDelta: {x: -1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621971021
 MonoBehaviour:
@@ -888,7 +871,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 'Images: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -931,7 +914,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1220,10 +1203,10 @@ RectTransform:
   m_Father: {fileID: 650587785}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -287, y: 304.13}
-  m_SizeDelta: {x: 160, y: 36.582}
+  m_AnchorMin: {x: 0.21400002, y: 0.897}
+  m_AnchorMax: {x: 0.33665627, y: 0.9464188}
+  m_AnchoredPosition: {x: 0.5, y: 0.13000488}
+  m_SizeDelta: {x: 3, y: 0.58200073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &914957685
 MonoBehaviour:
@@ -1689,10 +1672,10 @@ RectTransform:
   m_Father: {fileID: 650587785}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -41.25}
-  m_SizeDelta: {x: 1101, y: 502.5}
+  m_AnchorMin: {x: 0.07021876, y: 0.09427777}
+  m_AnchorMax: {x: 0.9282188, y: 0.7904445}
+  m_AnchoredPosition: {x: 0.99993896, y: 0.25}
+  m_SizeDelta: {x: 3, y: 1.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777047496
 MonoBehaviour:
@@ -2203,17 +2186,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918836711}
   m_CullTransparentMesh: 1
---- !u!114 &2097922288 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9081297450186092323, guid: 4c947b156e6681b488f3e5061e0c953f, type: 3}
-  m_PrefabInstance: {fileID: 9081297452015513555}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90b03fc3fc3448d2975220e8ab2caee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &698976520483886938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2341,14 +2313,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8174723201137721557, guid: 176c10758de2ce745a7b1ee85eb55c16, type: 3}
-      propertyPath: _spawner
-      value: 
-      objectReference: {fileID: 2097922288}
-    - target: {fileID: 8174723201137721557, guid: 176c10758de2ce745a7b1ee85eb55c16, type: 3}
-      propertyPath: _imagesHandler
-      value: 
-      objectReference: {fileID: 68583796}
     - target: {fileID: 8174723201137721557, guid: 176c10758de2ce745a7b1ee85eb55c16, type: 3}
       propertyPath: _topBarMediator
       value: 

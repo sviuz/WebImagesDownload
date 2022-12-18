@@ -25,11 +25,12 @@ public class TopBarMediator : MonoBehaviour {
 
   public void IncreaseImagesCapacity() {
     _imagesCapacity += 1;
-    _imagesCapacityText.text = _imagesCapacity.ToString();
+    _imagesCapacityText.text = $"Images: {_imagesCapacity.ToString()}";
   }
 
   public void ClearCapacity() {
     _imagesCapacity = 0;
-    _imagesCapacityText.text = _imagesCapacity.ToString();
+    _imagesCapacityText.text = $"Images: {_imagesCapacity.ToString()}";
+    _inputField.text = String.Empty;
   }
 }

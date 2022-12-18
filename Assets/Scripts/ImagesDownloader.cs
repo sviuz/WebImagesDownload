@@ -12,14 +12,10 @@ public class ImagesDownloader : MonoBehaviour {
   /// </summary>
   [SerializeField]
   private TopBarMediator _topBarMediator;
-  [SerializeField]
-  private Spawner _spawner;
-  [SerializeField]
-  private ImagesHandler _imagesHandler;
 
   private void Start() {
     _topBarMediator.SubscribeGetImagesButton(DownloadImage);
-    _topBarMediator.SubscribeClearButton(_imagesHandler.Clear);
+    _topBarMediator.SubscribeClearButton(CleanUp);
   }
 
   private void DownloadImage(string url) {
@@ -39,10 +35,11 @@ public class ImagesDownloader : MonoBehaviour {
              var cycleProtection = 0;
              while (B(htmlCode, cycleProtection)) {
                cycleProtection++;
-               string imageUrl = htmlCode.ConvertAsImageUrl();
+               string imageUrl = ExtractImageUtl(ref htmlCode);
 
                if (TextureHandler.ExtractObject(imageUrl, out Texture texture)) {
                  InstantiateRawImage(imageUrl, texture);
+                 Debug.Log($"instantiating {imageUrl}");
                  continue;
                }
 
@@ -51,8 +48,17 @@ public class ImagesDownloader : MonoBehaviour {
            };
   }
 
+  private static string ExtractImageUtl(ref string htmlCode) {
+    var textToFind = "<img";
+    htmlCode = htmlCode[(htmlCode.IndexOf(textToFind, StringComparison.Ordinal) + textToFind.Length)..];
+    textToFind = "src=\"";
+    htmlCode = htmlCode[(htmlCode.IndexOf(textToFind, StringComparison.Ordinal) + textToFind.Length)..];
+    string imageUrl = htmlCode[..htmlCode.IndexOf("\"", StringComparison.Ordinal)];
+    return imageUrl;
+  }
+
   private void CleanUp() {
-    _imagesHandler.Clear();
+    ImagesHandler.Clear();
     _topBarMediator.ClearCapacity();
   }
 
@@ -69,10 +75,10 @@ public class ImagesDownloader : MonoBehaviour {
   }
 
   private void InstantiateRawImage(string imageUrl, Texture texture) {
-    RawImagePrefab prefab = _spawner.Spawn(texture);
+    RawImagePrefab prefab = Spawner.OnSpawn?.Invoke(texture);
     _topBarMediator.IncreaseImagesCapacity();
     TextureHandler.AddObject(imageUrl, texture);
-    _imagesHandler.AddImageObject(imageUrl, prefab);
+    ImagesHandler.AddImageObject(imageUrl, prefab);
   }
 
   private static void Get(string url, Action<string> onError, Action<string> onSuccess) {
